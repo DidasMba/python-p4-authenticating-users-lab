@@ -6,6 +6,13 @@ from flask_restful import Api, Resource
 
 from models import db, Article, User
 
+from resources.sessions import LoginResource, LogoutResource, CheckSessionResource
+
+api.add_resource(LoginResource, '/login')
+api.add_resource(LogoutResource, '/logout')
+api.add_resource(CheckSessionResource, '/check_session')
+
+
 app = Flask(__name__)
 app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x1a\x10K'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'

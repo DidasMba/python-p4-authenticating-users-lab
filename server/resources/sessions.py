@@ -17,3 +17,10 @@ class LoginResource(Resource):
             return user.serialize(), 200
         else:
             return {'error': 'Invalid username'}, 401
+        
+class LogoutResource(Resource):
+    def delete(self):
+        # Remove the user_id value from the session
+        session.pop('user_id', None)
+        return {}, 204
+

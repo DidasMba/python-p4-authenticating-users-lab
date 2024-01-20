@@ -24,3 +24,15 @@ class LogoutResource(Resource):
         session.pop('user_id', None)
         return {}, 204
 
+class CheckSessionResource(Resource):
+    def get(self):
+        # Retrieve the user_id value from the session
+        user_id = session.get('user_id')
+
+        if user_id:
+            # If the session has a user_id, return the user as JSON
+            user = User.query.get(user_id)
+            return user.serialize(), 200
+        else:
+            # If the session does not have a user_id, return Unauthorized
+            return {}, 401
